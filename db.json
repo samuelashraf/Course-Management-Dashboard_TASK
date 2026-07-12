@@ -1,0 +1,38 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "courseName": "Angular Fundamentals",
+      "instructorName": "Ahmed Ali",
+      "category": "Frontend",
+      "duration": 20,
+      "price": 1500,
+      "status": "Active",
+      "description": "Learn Angular from scratch",
+      "createdDate": "2026-06-01"
+    },
+    {
+      "id": "2",
+      "courseName": "Node.js Backend",
+      "instructorName": "Sara Mohamed",
+      "category": "Backend",
+      "duration": 30,
+      "price": 2500,
+      "status": "Active",
+      "description": "Build REST APIs with Node.js",
+      "createdDate": "2026-06-24T16:32:05.553Z"
+    },
+    {
+      "id": "3",
+      "courseName": "UI/UX Design Basics",
+      "instructorName": "Mona Hassan",
+      "category": "Design",
+      "duration": 15,
+      "price": 1200,
+      "status": "Archived",
+      "description": "Design principles and tools",
+      "createdDate": "2026-05-20"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
