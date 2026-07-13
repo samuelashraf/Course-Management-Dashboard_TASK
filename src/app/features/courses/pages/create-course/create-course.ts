@@ -11,8 +11,8 @@ export class CreateCourse {
 @ViewChild(CourseForm)
   courseFormComponent!: CourseForm;
 
-  // canDeactivate() {
+  canDeactivate() {
     
-  //   return this.courseFormComponent?.canDeactivate() ?? true;
-  // }
+    return this.courseFormComponent?.canDeactivate() ?? true;
+  }
 }

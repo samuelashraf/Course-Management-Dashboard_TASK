@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { pendingChangesGuard } from '../../core/guards/pending-changes-guard';
 
 export const COURSE_ROUTES: Routes = [
   {
@@ -12,7 +13,8 @@ export const COURSE_ROUTES: Routes = [
     path: 'create',
     loadComponent: () =>
       import('./pages/create-course/create-course')
-        .then(c => c.CreateCourse)
+        .then(c => c.CreateCourse),
+         canDeactivate: [pendingChangesGuard]
         
   },
 
@@ -20,7 +22,8 @@ export const COURSE_ROUTES: Routes = [
     path: ':id/edit',
     loadComponent: () =>
       import('./pages/edit-course/edit-course')
-        .then(c => c.EditCourse)
+        .then(c => c.EditCourse),
+         canDeactivate: [pendingChangesGuard]
        
   },
 
