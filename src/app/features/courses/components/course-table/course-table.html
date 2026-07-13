@@ -1,1 +1,88 @@
-<p>course-table works!</p>
+<div class="courses-view">
+
+    <!-- Table view (desktop / tablet) -->
+    <div class="table-card d-none d-md-block">
+        <div class="table-scroll">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Course</th>
+                        <th>Instructor</th>
+                        <th>Category</th>
+                        <th>Duration</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (course of courses(); track course.id) {
+                    <tr>
+                        <td class="muted">{{ course.id }}</td>
+                        <td class="fw-name">{{ course.courseName }}</td>
+                        <td>{{ course.instructorName }}</td>
+                        <td><span class="tag">{{ course.category }}</span></td>
+                        <td>{{ course.duration }}h</td>
+                        <td>{{ course.price | number }} EGP</td>
+                        <td><span class="status-pill" [class]="statusClass(course.status)">{{ course.status }}</span>
+                        </td>
+                        <td class="muted">{{ course.createdDate | date:'mediumDate' }}</td>
+                        <td class="text-center">
+                            <div class="actions">
+                                <button class="icon-btn" (click)="view.emit(course)"><i class="bi bi-eye"></i></button>
+                                <button class="icon-btn" (click)="edit.emit(course)"><i
+                                        class="bi bi-pencil"></i></button>
+                                <button class="icon-btn danger" (click)="delete.emit(course)"><i
+                                        class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <app-pagination [currentPage]="currentPage" [totalItems]="totalItems" [pageSize]="pageSize"
+            (pageChange)="pageChange.emit($event)" />
+    </div>
+
+    <!-- Card view (mobile only) -->
+    <div class="cards-list d-md-none">
+
+        @for (course of courses(); track course.id) {
+        <div class="course-card">
+
+            <div class="card-top">
+                <div>
+                    <p class="card-name">{{ course.courseName }}</p>
+                    <p class="card-instructor">{{ course.instructorName }}</p>
+                </div>
+                <span class="status-pill" [class]="statusClass(course.status)">{{ course.status }}</span>
+            </div>
+
+            <div class="card-meta">
+                <span class="tag">{{ course.category }}</span>
+                <span class="meta-item"><i class="bi bi-clock"></i> {{ course.duration }}h</span>
+                <span class="meta-item">{{ course.price | number }} EGP</span>
+            </div>
+
+            <div class="card-footer">
+                <span class="muted">{{ course.createdDate | date:'mediumDate' }}</span>
+                <div class="actions">
+                    <button class="icon-btn" (click)="view.emit(course)"><i class="bi bi-eye"></i></button>
+                    <button class="icon-btn" (click)="edit.emit(course)"><i class="bi bi-pencil"></i></button>
+                    <button class="icon-btn danger" (click)="delete.emit(course)"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+
+        </div>
+        }
+
+        <app-pagination [currentPage]="currentPage" [totalItems]="totalItems" [pageSize]="pageSize"
+            (pageChange)="pageChange.emit($event)" />
+
+    </div>
+
+</div>

@@ -20,5 +20,8 @@ getCourses(): Observable<Course[]> {
   updateCourse(course: Course): Observable<Course> {
     return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
   }
+  getCoursesById(id: number): Observable<Course> {
+    return this.http.get<Course>(`${this.apiUrl}/${id}`);
+  }
 
 }

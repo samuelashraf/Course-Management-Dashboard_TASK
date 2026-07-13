@@ -55,3 +55,241 @@
     transform: translateX(100%);
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+.courses-page {
+
+    width: 100%;
+    margin: 0 ;
+    padding: 32px 24px 60px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+.page-head {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
+
+    .page-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .page-sub {
+        color: #94a3b8;
+        font-size: .85rem;
+        margin: 6px 0 0;
+    }
+
+}
+
+.btn-primary {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #ea7317;
+    color: #fff;
+    font-weight: 600;
+    font-size: .85rem;
+
+}
+
+.state-card {
+
+    background: #fff;
+    border: 1px solid #eef0f2;
+    border-radius: 16px;
+    padding: 52px 24px;
+    text-align: center;
+
+    i {
+        font-size: 2rem;
+        color: #cbd5e1;
+    }
+
+    h5 {
+        font-family: 'Sora', sans-serif;
+        margin: 16px 0 4px;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    p {
+        color: #94a3b8;
+        font-size: .85rem;
+        margin: 0;
+    }
+
+}
+
+.error-state {
+    i { color: #ea7317; }
+    p { color: #c2410c; font-weight: 600; }
+}
+
+.skeleton-rows {
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+
+.skeleton-row {
+
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 576px) {
+
+    .page-head {
+        flex-direction: column;
+        align-items: stretch;
+
+        .btn-primary {
+            justify-content: center;
+        }@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+.courses-page {
+
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+.page-head {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
+
+    .page-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .page-sub {
+        color: #94a3b8;
+        font-size: .85rem;
+        margin: 6px 0 0;
+    }
+
+}
+
+.btn-primary {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #ea7317;
+    color: #fff;
+    font-weight: 600;
+    font-size: .85rem;
+
+}
+
+.state-card {
+
+    background: #fff;
+    border: 1px solid #eef0f2;
+    border-radius: 16px;
+    padding: 52px 24px;
+    text-align: center;
+
+    i {
+        font-size: 2rem;
+        color: #cbd5e1;
+    }
+
+    h5 {
+        font-family: 'Sora', sans-serif;
+        margin: 16px 0 4px;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    p {
+        color: #94a3b8;
+        font-size: .85rem;
+        margin: 0;
+    }
+
+}
+
+.error-state {
+    i { color: #ea7317; }
+    p { color: #c2410c; font-weight: 600; }
+}
+
+.skeleton-rows {
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+
+.skeleton-row {
+
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 576px) {
+
+    .page-head {
+        flex-direction: column;
+        align-items: stretch;
+
+        .btn-primary {
+            justify-content: center;
+        }
+    }
+
+}
+    }
+
+}

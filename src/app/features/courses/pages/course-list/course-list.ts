@@ -13,18 +13,18 @@ import { CourseTable } from '../../components/course-table/course-table';
 @Component({
   selector: 'app-course-list',
   imports: [CommonModule,CourseFilters,CourseTable,FormsModule],
-  templateUrl: './course-list.html',
+  templateUrl:'./course-list.html',
   styleUrl: './course-list.scss',
 })
 export class CourseList implements OnInit {
- courses:Course[] = [];
-  isLoading :boolean   = true
-  errorMessage :string = '';
-  searchTerm :string = '';
-  selectedStatus: CourseStatus | '' = CourseStatus.Active;
-  currentPage :number = 1;
+ courses      = signal<Course[]>([]);
+  isLoading    = signal(true);
+  errorMessage = signal('');
+  searchTerm   = signal('');
+  selectedStatus = signal<CourseStatus | ''>('');
+  currentPage  = signal(1);
   sortBy = signal('');
-  readonly pageSize = 3;
+  readonly pageSize = 2;
    constructor(
     private courseService:Courseservice,
     private router: Router,
@@ -33,36 +33,38 @@ export class CourseList implements OnInit {
 
   }
   ngOnInit(): void {
+  
     this.loadCourses(); 
+
   }
      loadCourses() {
-    this.isLoading=true;
+    this.isLoading.set(true);
     this.courseService.getCourses().subscribe({
       next: (data) => { 
-        this.courses = data; 
-        console.log('Courses loaded:', this.courses);
+        this.courses.set(data); 
      setTimeout(() => {
 
-        this.isLoading=false;
+        this.isLoading.set(false);
 
       }, 1500);
       },
       error: (err) => {
             setTimeout(() => {
 
-        this.errorMessage = 'Failed to load courses';
-        this.isLoading = false;
+        this.errorMessage.set('Failed to load courses');
+        this.isLoading.set(false);
 
       }, 1500);
       }
     });
   }
+
  filtered = computed(() => {
 
-  const term = this.searchTerm.toLowerCase();
-  const status = this.selectedStatus;
+  const term = this.searchTerm().toLowerCase();
+  const status = this.selectedStatus();
 
-  const result = this.courses.filter(c =>
+  const result = this.courses().filter(c =>
     c.courseName.toLowerCase().includes(term) &&
     (status ? c.status === status : true)
   );
@@ -97,10 +99,9 @@ export class CourseList implements OnInit {
 
   return result;
 });
-  
 
   paginated = computed(() => {
-    const start = (this.currentPage - 1) * this.pageSize;
+    const start = (this.currentPage() - 1) * this.pageSize;
     return this.filtered().slice(start, start + this.pageSize);
   });
 
@@ -109,15 +110,16 @@ export class CourseList implements OnInit {
   }
 
   onSearch(term: string){
-     this.searchTerm = term;
-     this.currentPage = 1;
+     this.searchTerm.set(term);           
+     this.currentPage.set(1); 
+            
   }
-  onStatusChange(status: CourseStatus | '') {
-     this.selectedStatus = status;
-     this.currentPage = 1;
+  onStatusChange(s: CourseStatus | '') {
+     this.selectedStatus.set(s);
+     this.currentPage.set(1);
  }
   onPageChange(page: number){ 
-    this.currentPage = page; 
+    this.currentPage.set(page); 
   }
 
   onView(course: Course){
@@ -141,7 +143,7 @@ onDelete(course: Course) {
 
     reverseButtons: true
 
-  }).then((result: any) => {
+  }).then(result => {
 
     if (result.isConfirmed) {
 
@@ -158,7 +160,9 @@ onDelete(course: Course) {
               showConfirmButton: false
             });
 
-            this.courses = this.courses.filter(c => c.id !== course.id);
+            this.courses.update(
+              list => list.filter(c => c.id !== course.id)
+            );
 
           },
 
@@ -181,8 +185,9 @@ onDelete(course: Course) {
 }
 
 onSortChange(sort: string) {
-  this.sortBy.set(sort); 
-  this.currentPage = 1;
+  this.sortBy.set(sort);
+  this.currentPage.set(1);
 }
-
 }
+  
+ 

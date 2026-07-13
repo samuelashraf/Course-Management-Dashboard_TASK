@@ -1,107 +1,47 @@
-<div class="container-fluid py-4">
+<div class="courses-page">
 
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="page-head">
         <div>
-            <h2 class="fw-bold mb-0">Courses</h2>
-            <small class="text-muted">{{ filtered().length }} course(s) found</small>
+            <h2 class="page-title">Courses</h2>
+            <p class="page-sub">{{ filtered().length }} course(s) found</p>
         </div>
-        <button class="btn btn-primary" (click)="goToCreat()">
-            <i class="bi bi-plus-lg me-1"></i> Add Course
+        <button class="btn-primary" (click)="goToCreat()">
+            <i class="bi bi-plus-lg"></i> Add Course
         </button>
     </div>
-    <!---->
-    <app-course-filters [searchTerm]="searchTerm" [selectedStatus]="selectedStatus" (searchChange)="onSearch($event)"
-        (statusChange)="onStatusChange($event)" (sortChange)="onSortChange($event)" />
 
-    <!-- Loading -->
-    @if (isLoading) {
+    <app-course-filters [searchTerm]="searchTerm()" [selectedStatus]="selectedStatus()"
+        (searchChange)="onSearch($event)" (statusChange)="onStatusChange($event)" (sortChange)="onSortChange($event)" />
 
-    <div class="card shadow-sm">
-
-        <div class="table-responsive">
-
-            <table class="table">
-
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Course</th>
-                        <th>Instructor</th>
-                        <th>Category</th>
-                        <th>Duration</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    @for(item of [1,2,3,4,5,6]; track item){
-
-                    <tr>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-                            <div class="skeleton skeleton-line"></div>
-                        </td>
-
-                        <td>
-
-                            <div class="d-flex gap-2">
-
-                                <div class="skeleton skeleton-btn"></div>
-
-                                <div class="skeleton skeleton-btn"></div>
-
-                                <div class="skeleton skeleton-btn"></div>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                    }
-
-                </tbody>
-
-            </table>
-
+    @if (isLoading()) {
+    <div class="state-card">
+        <div class="skeleton-rows">
+            @for (item of [1,2,3,4]; track item) {
+            <div class="skeleton-row"></div>
+            }
         </div>
-
     </div>
-
     }
 
+    @if (!isLoading() && !errorMessage() && filtered().length === 0) {
+    <div class="state-card empty-state">
+        <i class="bi bi-inbox"></i>
+        <h5>No courses found</h5>
+        <p>Try a different search or add a new course.</p>
+    </div>
+    }
+
+    @if (!isLoading() && errorMessage()) {
+    <div class="state-card error-state">
+        <i class="bi bi-exclamation-triangle"></i>
+        <p>{{ errorMessage() }}</p>
+    </div>
+    }
+
+    @if (!isLoading() && !errorMessage() && filtered().length > 0) {
+    <app-course-table [courses]="paginated()" [currentPage]="currentPage()" [totalItems]="filtered().length"
+        [pageSize]="pageSize" (view)="onView($event)" (edit)="onEdit($event)" (delete)="onDelete($event)"
+        (pageChange)="onPageChange($event)" />
+    }
 
 </div>

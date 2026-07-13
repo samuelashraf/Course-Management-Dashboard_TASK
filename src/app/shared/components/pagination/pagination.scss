@@ -1,0 +1,76 @@
+.pager {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 18px;
+    border-top: 1px solid #f1f5f9;
+
+}
+
+.pager-info {
+    font-size: .78rem;
+    color: #94a3b8;
+
+    .pager-count {
+        color: #1e293b;
+        font-weight: 700;
+    }
+}
+
+.pager-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pager-arrow {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        color: #e2e8f0;
+    }
+}
+
+.pager-pages {
+    display: flex;
+    gap: 2px;
+    margin: 0 8px;
+    padding: 4px;
+    background: #f8fafc;
+    border-radius: 999px;
+}
+
+.pager-dot {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 8px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #94a3b8;
+    font-size: .78rem;
+    font-weight: 600;
+
+    &.is-active {
+        background: #ea7317;
+        color: #fff;
+    }
+}
+
+@media (max-width: 576px) {
+    .pager {
+        justify-content: center;
+        text-align: center;
+    }
+}
