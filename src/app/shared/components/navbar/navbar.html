@@ -1,0 +1,29 @@
+<nav class="app-navbar">
+
+    <div class="navbar-inner">
+
+        <a class="brand" routerLink="/">
+            <span class="brand-mark">CM</span>
+            <span class="brand-text">Course Manager</span>
+        </a>
+
+        <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+            <i class="bi" [ngClass]="isMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
+        </button>
+
+        <div class="nav-links" [class.open]="isMenuOpen">
+
+            <a (click)="goHome()">
+                <i class="bi bi-book"></i> Courses
+            </a>
+
+            <div class="nav-user">
+                <div class="user-avatar">A</div>
+                <span class="user-name">Admin</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

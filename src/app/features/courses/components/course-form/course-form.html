@@ -1,0 +1,231 @@
+<form [formGroup]="courseForm" (ngSubmit)="submit()">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+            <h3 class="mb-0">
+                {{ isEditMode ? 'Edit Course' : 'Add Course' }}
+            </h3>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Course Name -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Course Name
+                </label>
+
+                <input type="text" class="form-control" formControlName="courseName">
+
+                @if(f['courseName'].touched &&
+                f['courseName'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Course name is required
+                </small>
+
+                }
+
+                @if(f['courseName'].touched &&
+                f['courseName'].errors?.['minlength']) {
+
+                <small class="text-danger">
+                    Minimum 3 characters required
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Instructor Name -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Instructor Name
+                </label>
+
+                <input type="text" class="form-control" formControlName="instructorName">
+
+                @if(f['instructorName'].touched &&
+                f['instructorName'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Instructor name is required
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Category
+                </label>
+
+                <input type="text" class="form-control" formControlName="category">
+
+                @if(f['category'].touched &&
+                f['category'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Category is required
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Duration -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Duration (Hours)
+                </label>
+
+                <input type="number" class="form-control" formControlName="duration">
+
+                @if(f['duration'].touched &&
+                f['duration'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Duration is required
+                </small>
+
+                }
+
+                @if(f['duration'].touched &&
+                f['duration'].errors?.['min']) {
+
+                <small class="text-danger">
+                    Duration must be greater than 0
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Price -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Price
+                </label>
+
+                <input type="number" class="form-control" formControlName="price">
+
+                @if(f['price'].touched &&
+                f['price'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Price is required
+                </small>
+
+                }
+
+                @if(f['price'].touched &&
+                f['price'].errors?.['min']) {
+
+                <small class="text-danger">
+                    Price cannot be negative
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Status -->
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Status
+                </label>
+
+                <select class="form-select" formControlName="status">
+
+                    <option value="">
+                        Select Status
+                    </option>
+
+                    <option value="Active">
+                        Active
+                    </option>
+
+                    <option value="Draft">
+                        Draft
+                    </option>
+
+                    <option value="Archived">
+                        Archived
+                    </option>
+
+                </select>
+
+                @if(f['status'].touched &&
+                f['status'].errors?.['required']) {
+
+                <small class="text-danger">
+                    Status is required
+                </small>
+
+                }
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea rows="5" class="form-control" formControlName="description">
+                </textarea>
+
+                <div class="mt-1">
+
+                    <small class="text-muted">
+
+                        {{
+                        courseForm.get('description')?.value?.length || 0
+                        }}/500
+
+                    </small>
+
+                </div>
+
+                @if(f['description'].errors?.['maxlength']) {
+
+                <small class="text-danger">
+                    Maximum 500 characters allowed
+                </small>
+
+                }
+
+            </div>
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-end gap-2">
+
+            <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+
+                Cancel
+
+            </button>
+
+            <button type="submit" class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Course' : 'Add Course' }}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>

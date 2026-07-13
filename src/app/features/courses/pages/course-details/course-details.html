@@ -3,19 +3,17 @@
     @if(isLoading){
 
     <div class="loading-state">
-
-        <div class="spinner-border text-primary"></div>
-
+        <div class="spinner"></div>
         <p>Loading course...</p>
-
     </div>
 
     }
 
     @if(errorMessage){
 
-    <div class="alert alert-danger">
-        {{ errorMessage }}
+    <div class="error-state">
+        <i class="bi bi-exclamation-triangle"></i>
+        <p>{{ errorMessage }}</p>
     </div>
 
     }
@@ -25,24 +23,12 @@
     <div class="details-card">
 
         <!-- Header -->
-
         <div class="details-header">
 
             <div>
-
-                <span class="category">
-                    {{ course.category }}
-                </span>
-
-                <h2>
-                    {{ course.courseName }}
-                </h2>
-
-                <p>
-                    Instructor:
-                    <strong>{{ course.instructorName }}</strong>
-                </p>
-
+                <span class="category">{{ course.category }}</span>
+                <h2>{{ course.courseName }}</h2>
+                <p>Instructor: <strong>{{ course.instructorName }}</strong></p>
             </div>
 
             <span class="status-badge" [ngClass]="{
@@ -50,79 +36,48 @@
                     'draft': course.status === 'Draft',
                     'archived': course.status === 'Archived'
                 }">
-
                 {{ course.status }}
-
             </span>
 
         </div>
 
         <!-- Info -->
-
-        <div class="row g-4 mt-2">
+        <div class="row g-3 mt-2 ms-2 me-2">
 
             <div class="col-lg-4 col-md-6">
-
                 <div class="info-card">
-
                     <small>Duration</small>
-
                     <h5>{{ course.duration }} Hours</h5>
-
                 </div>
-
             </div>
 
             <div class="col-lg-4 col-md-6">
-
                 <div class="info-card">
-
                     <small>Price</small>
-
                     <h5>{{ course.price | currency:'EGP' }}</h5>
-
                 </div>
-
             </div>
 
             <div class="col-lg-4 col-md-12">
-
                 <div class="info-card">
-
                     <small>Created</small>
-
                     <h5>{{ course.createdDate | date:'mediumDate' }}</h5>
-
                 </div>
-
             </div>
 
         </div>
 
         <!-- Description -->
-
-        <div class="description-card mt-4">
-
+        <div class="description-card mt-4 ms-3 me-3">
             <h5>Description</h5>
-
-            <p>
-
-                {{ course.description || 'No Description Available.' }}
-
-            </p>
-
+            <p>{{ course.description || 'No Description Available.' }}</p>
         </div>
 
         <!-- Footer -->
-
         <div class="footer-actions">
-
-            <button class="btn btn-primary px-4" (click)="goBack()">
-
-                ← Back To Courses
-
+            <button class="btn-back" (click)="goBack()">
+                <i class="bi bi-arrow-left"></i> Back To Courses
             </button>
-
         </div>
 
     </div>
