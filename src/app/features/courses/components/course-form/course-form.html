@@ -1,229 +1,114 @@
-<form [formGroup]="courseForm" (ngSubmit)="submit()">
+<form [formGroup]="courseForm" (ngSubmit)="submit()" class="course-form">
 
-    <div class="card shadow-sm">
+    <div class="form-card">
 
-        <div class="card-header">
-            <h3 class="mb-0">
-                {{ isEditMode ? 'Edit Course' : 'Add Course' }}
-            </h3>
+        <div class="form-header">
+            <h3>{{ isEditMode ? 'Edit Course' : 'Add Course' }}</h3>
         </div>
 
-        <div class="card-body">
+        <div class="form-body">
 
-            <!-- Course Name -->
+            <!-- Row: Course Name, Instructor, Category, Status -->
+            <div class="field-row-2">
 
-            <div class="mb-3">
-                <label class="form-label">
-                    Course Name
-                </label>
+                <div class="field-group">
+                    <label>Course Name</label>
+                    <input type="text" formControlName="courseName" placeholder="e.g. Angular Fundamentals">
 
-                <input type="text" class="form-control" formControlName="courseName">
+                    @if(f['courseName'].touched && f['courseName'].errors?.['required']) {
+                    <small class="error-text">Course name is required</small>
+                    }
+                    @if(f['courseName'].touched && f['courseName'].errors?.['minlength']) {
+                    <small class="error-text">Minimum 3 characters required</small>
+                    }
+                </div>
 
-                @if(f['courseName'].touched &&
-                f['courseName'].errors?.['required']) {
+                <div class="field-group">
+                    <label>Instructor Name</label>
+                    <input type="text" formControlName="instructorName" placeholder="e.g. Ahmed Ali">
 
-                <small class="text-danger">
-                    Course name is required
-                </small>
+                    @if(f['instructorName'].touched && f['instructorName'].errors?.['required']) {
+                    <small class="error-text">Instructor name is required</small>
+                    }
+                </div>
 
-                }
-
-                @if(f['courseName'].touched &&
-                f['courseName'].errors?.['minlength']) {
-
-                <small class="text-danger">
-                    Minimum 3 characters required
-                </small>
-
-                }
 
             </div>
+            <div class="field-row-2">
 
-            <!-- Instructor Name -->
+                <div class="field-group">
+                    <label>Category</label>
+                    <input type="text" formControlName="category" placeholder="e.g. Frontend">
 
-            <div class="mb-3">
-                <label class="form-label">
-                    Instructor Name
-                </label>
+                    @if(f['category'].touched && f['category'].errors?.['required']) {
+                    <small class="error-text">Category is required</small>
+                    }
+                </div>
 
-                <input type="text" class="form-control" formControlName="instructorName">
+                <div class="field-group">
+                    <label>Status</label>
+                    <select formControlName="status">
+                        <option value="">Select status</option>
+                        <option value="Active">Active</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Archived">Archived</option>
+                    </select>
 
-                @if(f['instructorName'].touched &&
-                f['instructorName'].errors?.['required']) {
-
-                <small class="text-danger">
-                    Instructor name is required
-                </small>
-
-                }
-
+                    @if(f['status'].touched && f['status'].errors?.['required']) {
+                    <small class="error-text">Status is required</small>
+                    }
+                </div>
             </div>
 
-            <!-- Category -->
+            <!-- Row: Duration, Price -->
+            <div class="field-row-2">
 
-            <div class="mb-3">
-                <label class="form-label">
-                    Category
-                </label>
+                <div class="field-group">
+                    <label>Duration (Hours)</label>
+                    <input type="number" formControlName="duration" placeholder="0">
 
-                <input type="text" class="form-control" formControlName="category">
+                    @if(f['duration'].touched && f['duration'].errors?.['required']) {
+                    <small class="error-text">Duration is required</small>
+                    }
+                    @if(f['duration'].touched && f['duration'].errors?.['min']) {
+                    <small class="error-text">Must be greater than 0</small>
+                    }
+                </div>
 
-                @if(f['category'].touched &&
-                f['category'].errors?.['required']) {
+                <div class="field-group">
+                    <label>Price</label>
+                    <input type="number" formControlName="price" placeholder="0">
 
-                <small class="text-danger">
-                    Category is required
-                </small>
-
-                }
-
-            </div>
-
-            <!-- Duration -->
-
-            <div class="mb-3">
-                <label class="form-label">
-                    Duration (Hours)
-                </label>
-
-                <input type="number" class="form-control" formControlName="duration">
-
-                @if(f['duration'].touched &&
-                f['duration'].errors?.['required']) {
-
-                <small class="text-danger">
-                    Duration is required
-                </small>
-
-                }
-
-                @if(f['duration'].touched &&
-                f['duration'].errors?.['min']) {
-
-                <small class="text-danger">
-                    Duration must be greater than 0
-                </small>
-
-                }
-
-            </div>
-
-            <!-- Price -->
-
-            <div class="mb-3">
-                <label class="form-label">
-                    Price
-                </label>
-
-                <input type="number" class="form-control" formControlName="price">
-
-                @if(f['price'].touched &&
-                f['price'].errors?.['required']) {
-
-                <small class="text-danger">
-                    Price is required
-                </small>
-
-                }
-
-                @if(f['price'].touched &&
-                f['price'].errors?.['min']) {
-
-                <small class="text-danger">
-                    Price cannot be negative
-                </small>
-
-                }
-
-            </div>
-
-            <!-- Status -->
-
-            <div class="mb-3">
-                <label class="form-label">
-                    Status
-                </label>
-
-                <select class="form-select" formControlName="status">
-
-                    <option value="">
-                        Select Status
-                    </option>
-
-                    <option value="Active">
-                        Active
-                    </option>
-
-                    <option value="Draft">
-                        Draft
-                    </option>
-
-                    <option value="Archived">
-                        Archived
-                    </option>
-
-                </select>
-
-                @if(f['status'].touched &&
-                f['status'].errors?.['required']) {
-
-                <small class="text-danger">
-                    Status is required
-                </small>
-
-                }
+                    @if(f['price'].touched && f['price'].errors?.['required']) {
+                    <small class="error-text">Price is required</small>
+                    }
+                    @if(f['price'].touched && f['price'].errors?.['min']) {
+                    <small class="error-text">Cannot be negative</small>
+                    }
+                </div>
 
             </div>
 
             <!-- Description -->
+            <div class="field-group">
+                <label>Description</label>
+                <textarea rows="4" formControlName="description"
+                    placeholder="Optional course description..."></textarea>
 
-            <div class="mb-3">
-
-                <label class="form-label">
-                    Description
-                </label>
-
-                <textarea rows="5" class="form-control" formControlName="description">
-                </textarea>
-
-                <div class="mt-1">
-
-                    <small class="text-muted">
-
-                        {{
-                        courseForm.get('description')?.value?.length || 0
-                        }}/500
-
-                    </small>
-
+                <div class="field-footer">
+                    <small class="char-count">{{ courseForm.get('description')?.value?.length || 0 }}/500</small>
                 </div>
 
                 @if(f['description'].errors?.['maxlength']) {
-
-                <small class="text-danger">
-                    Maximum 500 characters allowed
-                </small>
-
+                <small class="error-text">Maximum 500 characters allowed</small>
                 }
-
             </div>
 
         </div>
 
-        <div class="card-footer d-flex justify-content-end gap-2">
-
-            <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
-
-                Cancel
-
-            </button>
-
-            <button type="submit" class="btn btn-primary">
-
-                {{ isEditMode ? 'Update Course' : 'Add Course' }}
-
-            </button>
-
+        <div class="form-footer">
+            <button type="button" class="btn-cancel" (click)="goBack()">Cancel</button>
+            <button type="submit" class="btn-submit">{{ isEditMode ? 'Update Course' : 'Add Course' }}</button>
         </div>
 
     </div>

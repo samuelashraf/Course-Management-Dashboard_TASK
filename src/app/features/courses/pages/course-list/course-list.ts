@@ -105,7 +105,7 @@ export class CourseList implements OnInit {
     return this.filtered().slice(start, start + this.pageSize);
   });
 
-  goToCreat(){
+  goToCreate(){
     this.router.navigate(['/courses/create'])
   }
 

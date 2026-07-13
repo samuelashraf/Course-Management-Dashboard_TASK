@@ -2,7 +2,7 @@
 
     <div class="navbar-inner">
 
-        <a class="brand" routerLink="/">
+        <a class="brand cursor-pointer" style="cursor:pointer" (click)="goHome()">
             <span class="brand-mark">CM</span>
             <span class="brand-text">Course Manager</span>
         </a>
@@ -13,7 +13,7 @@
 
         <div class="nav-links" [class.open]="isMenuOpen">
 
-            <a (click)="goHome()">
+            <a (click)="goHome()" class="cursor-pointer" style="cursor:pointer">
                 <i class="bi bi-book"></i> Courses
             </a>
 
